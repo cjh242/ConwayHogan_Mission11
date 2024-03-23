@@ -4,6 +4,7 @@
 @model X.PagedList.IPagedList<Book>
 @using X.PagedList;
 @using X.PagedList.Mvc.Core;
+@using X.PagedList.Mvc;
 @addTagHelper *, X.PagedList.Mvc.Core
 
 
@@ -30,4 +31,11 @@
     </div>
 }
 
-@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }), 
+
+new X.PagedList.Web.Common.PagedListRenderOptions
+{
+    UlElementClasses = new[] { "pagination" },
+    LiElementClasses = new[] { "page-item" },
+    PageClasses = new[] { "page-link" },
+})
