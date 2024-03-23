@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model X.PagedList.IPagedList<Book>
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@addTagHelper *, X.PagedList.Mvc.Core
+
+
+@foreach(Book book in Model)
+{
+    <div class="card card-outline-primary m-1 p-1">
+        <div class="bg-faded p-1">
+            <h4>
+                @book.Title
+                <span class="badge rounded-pill bg-primary text-white" 
+                        style="float:right">
+                    <small>@book.Price.ToString("c")</small>
+                </span>
+            </h4>
+        </div>
+        <div class="card-text p-1">
+            <p>@book.Author</p>
+            <p>@book.Publisher</p>
+            <p>@book.Isbn</p>
+            <p>@book.Category</p>
+            <p>@book.Classification</p>
+            <p>@book.PageCount</p>
+        </div>
+    </div>
+}
+
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
